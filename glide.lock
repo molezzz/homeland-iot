@@ -1,0 +1,39 @@
+hash: b0c6f5ec762f71a4b7d7191f3e6c7103900eb993547db57238de00c675ef3cf7
+updated: 2017-11-04T22:31:35.959268745+08:00
+imports:
+- name: github.com/astaxie/beego
+  version: d96289a81bf67728cff7a19b067aaecc65a62ec6
+  subpackages:
+  - config
+  - context
+  - context/param
+  - grace
+  - logs
+  - orm
+  - session
+  - toolbox
+  - utils
+- name: github.com/mattn/go-sqlite3
+  version: 5160b48509cf5c877bc22c11c373f8c7738cdb38
+- name: golang.org/x/net
+  version: 01c190206fbdffa42f334f4b2bf2220f50e64920
+  subpackages:
+  - context
+testImports:
+- name: github.com/gopherjs/gopherjs
+  version: 444abdf920945de5d4a977b572bcc6c674d1e4eb
+  subpackages:
+  - js
+- name: github.com/jtolds/gls
+  version: 77f18212c9c7edc9bd6a33d383a7b545ce62f064
+- name: github.com/smartystreets/assertions
+  version: 0b37b35ec7434b77e77a4bb29b79677cced992ea
+  subpackages:
+  - internal/go-render/render
+  - internal/oglematchers
+- name: github.com/smartystreets/goconvey
+  version: e5b2b7c9111590d019a696c7800593f666e1a7f4
+  subpackages:
+  - convey
+  - convey/gotest
+  - convey/reporting
