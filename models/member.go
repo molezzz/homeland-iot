@@ -1,25 +1,27 @@
 package models
 
 import (
-	"github.com/astaxie/beego/orm"
 	"time"
+
+	"github.com/astaxie/beego/orm"
 )
 
 type Member struct {
-	Id int `orm:"auto"`
-	Username string
-	UnionId string `orm:"size(100)"`
-	OpenId string `orm:"size(100)"`
-	Nickname string `orm:"size(100)"`
-	Token string `orm:"size(64)"`
-	Sex bool
-	Province string `orm:"size(32)"`
-	City string `orm:"size(32)"`
-	Country string `orm:"size(32)"`
-	CreateAt time.Time `orm:"auto_now_add;type(datetime)"`
-	UpdateAt time.Time `orm:"auto_now;type(datetime)"`
+	ID         int `orm:"auto;column(id)"`
+	Username   string
+	UnionID    string `orm:"size(100);column(union_id)"`
+	OpenID     string `orm:"size(100);column(open_id)"`
+	Nickname   string `orm:"size(100)"`
+	Token      string `orm:"size(64)"`
+	Sex        bool
+	Province   string       `orm:"size(32)"`
+	City       string       `orm:"size(32)"`
+	Country    string       `orm:"size(32)"`
+	Equipments []*Equipment `orm:"reverse(many)"`
+	CreateAt   time.Time    `orm:"auto_now_add;type(datetime)"`
+	UpdateAt   time.Time    `orm:"auto_now;type(datetime)"`
 }
 
-func init()  {
+func init() {
 	orm.RegisterModel(new(Member))
 }

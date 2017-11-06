@@ -1,10 +1,12 @@
 package main
 
 import (
-	_ "homeland-iot/routers"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/mattn/go-sqlite3"
+	
+	_ "homeland-iot/routers"
 	_ "homeland-iot/models"
 )
 

@@ -1,10 +1,11 @@
-hash: b0c6f5ec762f71a4b7d7191f3e6c7103900eb993547db57238de00c675ef3cf7
-updated: 2017-11-04T22:31:35.959268745+08:00
+hash: 103fcca9ec3a647b5b3857020a082466e85d1011ff803559410ba15f1e5c37d2
+updated: 2017-11-06T21:51:47.510807741+08:00
 imports:
 - name: github.com/astaxie/beego
   version: d96289a81bf67728cff7a19b067aaecc65a62ec6
   subpackages:
   - config
+  - config/yaml
   - context
   - context/param
   - grace
@@ -13,6 +14,21 @@ imports:
   - session
   - toolbox
   - utils
+- name: github.com/beego/goyaml2
+  version: 5545475820ddd4db3f90a4900d44b65d077d702d
+- name: github.com/chanxuehong/internal
+  version: c1d8ef0f5517e0ec054ea9ba5aedb0094d9bbb6a
+- name: github.com/chanxuehong/rand
+  version: b54bf7f93440da0b6c81b05276d69cdcbf32c918
+- name: github.com/chanxuehong/sid
+  version: 1426da3b0352d9da0efdf92986e68a04cb03dd7f
+- name: github.com/chanxuehong/wechat.v2
+  version: daeda374fb99f960979c9ed1b6fcaf5dc8a5ae31
+  subpackages:
+  - internal/debug/api
+  - mp/oauth2
+  - oauth2
+  - util
 - name: github.com/mattn/go-sqlite3
   version: 5160b48509cf5c877bc22c11c373f8c7738cdb38
 - name: golang.org/x/net

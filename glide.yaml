@@ -4,6 +4,16 @@ import:
   version: ^1.9.0
   subpackages:
   - orm
+  - config
+  - config/yaml
 - package: github.com/mattn/go-sqlite3
   version: ^1.3.0
 - package: golang.org/x/net
+- package: github.com/chanxuehong/wechat.v2
+  subpackages:
+  - oauth2
+- package: github.com/beego/goyaml2
+  version: ~2.0.0
+- package: github.com/chanxuehong/rand
+- package: github.com/chanxuehong/sid
+- package: github.com/chanxuehong/internal
