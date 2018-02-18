@@ -8,11 +8,11 @@ import (
 )
 
 type Member struct {
-	ID         int `orm:"auto;column(id)"`
-	Username   string
-	UnionID    string `orm:"size(100);column(union_id)"`
-	OpenID     string `orm:"size(100);column(open_id)"`
-	Nickname   string `orm:"size(100)"`
+	ID         int `orm:"auto;column(id)" json:"id"`
+	Username   string `json:"username"`
+	UnionID    string `orm:"size(100);column(union_id)" json:"union_id"`
+	OpenID     string `orm:"size(100);column(open_id)" json:"open_id"`
+	Nickname   string `orm:"size(100)" json:"nickname"`
 	Token      string `orm:"size(64)"`
 	Sex        int
 	Province   string       `orm:"size(32)"`
@@ -20,8 +20,18 @@ type Member struct {
 	Country    string       `orm:"size(32)"`
 	Avatar     string       `orm:"size(255)"`
 	Equipments []*Equipment `orm:"reverse(many)"`
+	IsAdmin	   bool 		`orm:"default(false)"`
 	CreateAt   time.Time    `orm:"auto_now_add;type(datetime)"`
 	UpdateAt   time.Time    `orm:"auto_now;type(datetime)"`
+}
+
+func MemberFetch(id int) *Member {
+	member := Member{ ID: id }
+	o := orm.NewOrm()
+	if err := o.Read(&member);err != nil {
+		return nil
+	}
+	return &member
 }
 
 func MemberFromWechatInfo(info *mpoauth2.UserInfo) *Member {

@@ -3,13 +3,13 @@ package controllers
 import (
 	"homeland-iot/models"
 
-	"github.com/astaxie/beego"
 	config "github.com/astaxie/beego/config"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"github.com/chanxuehong/rand"
 	mpoauth2 "github.com/chanxuehong/wechat.v2/mp/oauth2"
 	"github.com/chanxuehong/wechat.v2/oauth2"
+
 )
 
 var (
@@ -21,15 +21,17 @@ var (
 )
 
 type MainController struct {
-	beego.Controller
+	CtrlEx
 }
 
 func (c *MainController) Get() {
-	state := string(rand.NewHex())
-	authCodeURL := mpoauth2.AuthCodeURL(wxAppID, wxRedirectURI, wxScope, state)
-	c.Data["Website"] = authCodeURL
-	c.Data["Email"] = wxScope
-	c.TplName = "index.tpl"
+	if signIn, _ := c.IsSignIn(); signIn == false {
+		state := string(rand.NewHex())
+		authCodeURL := mpoauth2.AuthCodeURL(wxAppID, wxRedirectURI, wxScope, state)
+		c.Redirect(authCodeURL, 301)
+		return
+	}
+	c.TplName = "index.html"
 	// 微信接口验证
 	//c.Ctx.WriteString(c.GetString("echostr"))
 }
@@ -61,16 +63,19 @@ func (c *MainController) WechatCallback() {
 
 	db := orm.NewOrm()
 	member := models.MemberFromWechatInfo(userinfo)
-
+	
 	created, _, err := db.ReadOrCreate(member, "OpenID")
 
 	if err != nil {
 		c.Ctx.WriteString("error")
 	} else {
+		logs.Debug("member ID: %+v\r\n", member.ID)
+		c.SetSession(models.MemberSessionKey, member.ID)
 		if created {
 			logs.Debug("created new member openID:" + member.OpenID)
 		}
-		c.Ctx.WriteString(member.Nickname)
+		//c.Ctx.WriteString(member.Nickname)
+		c.Redirect("/", 301)
 	}
 
 	// result, err := json.Marshal(userinfo)
