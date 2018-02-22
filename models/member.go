@@ -20,7 +20,7 @@ type Member struct {
 	Country    string       `orm:"size(32)"`
 	Avatar     string       `orm:"size(255)"`
 	Equipments []*Equipment `orm:"reverse(many)"`
-	IsAdmin	   bool 		`orm:"default(false)"`
+	IsAdmin	   bool 		`orm:"default(false)" json:"isAdmin"`
 	CreateAt   time.Time    `orm:"auto_now_add;type(datetime)"`
 	UpdateAt   time.Time    `orm:"auto_now;type(datetime)"`
 }

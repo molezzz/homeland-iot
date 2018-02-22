@@ -58,7 +58,12 @@ func main() {
 					ExposeHeaders:    []string{"Content-Length"},
 					AllowCredentials: true,
 				}))
-	beego.InsertFilter("/api/*",beego.BeforeRouter,FilterMemberAuth)
-	beego.InsertFilter("/api/admin/*",beego.BeforeRouter,FilterAdminAuth)
+	apis := []string {
+		"/api/equipments",
+		"/api/equipments/*",
+	}
+	for _,v := range apis {
+		beego.InsertFilter(v,beego.BeforeRouter,FilterMemberAuth)
+	}
 	beego.Run()
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <a href="javascript:;" class="item">
+    <a href="javascript:;" class="item" @click="scan">
       <i class="iconfont icon-scan"></i>
       <span>添加设备</span>
     </a>
@@ -27,9 +27,15 @@
 
 
 <script>
+import { MessageBox } from 'mint-ui';
 export default {
   data(){
     return {}
+  },
+  methods: {
+    scan(){
+      MessageBox('提示', '请直接使用微信扫一扫功能扫描设备二维码');
+    }
   }
 }
 </script>

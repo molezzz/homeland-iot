@@ -13,8 +13,8 @@ type Equipment struct {
 	UUID     string `orm:"column(uuid)" form:"uuid" json:"uuid"`
 	Name     string `form:"name" json:"name"`
 	Kind     string    `orm:"size(64)" form:"kind" json:"kind"`
-	Member   *Member   `orm:"null;rel(fk)"`
-	Records  []*Record `orm:"reverse(many)"`
+	Member   *Member   `orm:"null;rel(fk)" json:"member"`
+	Records  []*Record `orm:"reverse(many)" json:"records"`
 	CreateAt time.Time `orm:"auto_now_add;type(datetime)" json:"create_at"`
 	UpdateAt time.Time `orm:"auto_now;type(datetime)" json:"update_at"`
 }

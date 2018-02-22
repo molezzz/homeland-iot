@@ -1,10 +1,8 @@
 <template>
   <div id="app">
     <mt-header fixed title="homeland">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-      <mt-button icon="more" slot="right" @click.prevent="showAdminMenu"></mt-button>
+      <mt-button icon="back" slot="left" @click.prevent="goBack">返回</mt-button>
+      <mt-button v-if="currentMember && currentMember.isAdmin" icon="more" slot="right" @click.prevent="showAdminMenu"></mt-button>
     </mt-header>
     <router-view/>
     <mt-actionsheet :actions="actions" v-model="menuShow"></mt-actionsheet>
@@ -33,6 +31,7 @@ export default {
   data(){
     return {
       menuShow: false,
+      currentMember: null,
       actions: [{
         name: '添加新设备',
         method: () => {
@@ -41,9 +40,15 @@ export default {
       }]
     }
   },
+  created(){
+    this.currentMember = JSON.parse(window.signInMember)
+  },
   methods: {
     showAdminMenu(){
-      this.menuShow = true;
+      this.menuShow = true
+    },
+    goBack(){
+      this.$router.go(-1)
     }
   }
 }

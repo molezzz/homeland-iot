@@ -1,6 +1,6 @@
 <template>
   <div class="device-list">
-    <mt-cell :title="item.name" :label="item.uuid" is-link :to="'/devices/' + item.id" v-for="item in items"></mt-cell>
+    <mt-cell :title="item.name" :label="item.uuid" is-link :to="'/devices/' + item.uuid" v-for="item in items"></mt-cell>
   </div>
 </template>
 

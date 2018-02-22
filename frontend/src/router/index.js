@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import FrontPage from '@/components/FrontPage.vue'
 import DeviceList from '@/components/DeviceList.vue'
 import DeviceShow from '@/components/DeviceShow.vue'
+import DeviceBind from '@/components/DeviceBind.vue'
 import AdminAddDevice from '@/components/AdminAddDevice.vue'
 import 'mint-ui/lib/style.css';
 
@@ -20,6 +21,10 @@ export default new Router({
         path: '/devices',
         name: 'device_list',
         component: DeviceList
+    }, {
+        path: '/devices/bind/:id',
+        name: 'device_bind',
+        component: DeviceBind
     }, {
         path: '/devices/:id',
         name: 'device_show',

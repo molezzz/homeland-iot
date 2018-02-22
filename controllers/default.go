@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"homeland-iot/models"
+	"encoding/json"
 
 	config "github.com/astaxie/beego/config"
 	"github.com/astaxie/beego/logs"
@@ -18,6 +19,7 @@ var (
 	wxScope        string
 	wxRedirectURI  string
 	oauth2Endpoint oauth2.Endpoint
+	jsAPI models.WxJsApi
 )
 
 type MainController struct {
@@ -31,6 +33,15 @@ func (c *MainController) Get() {
 		c.Redirect(authCodeURL, 301)
 		return
 	}
+	//token, err := jsAPI.Ticket()
+	//logs.Debug("token: %+v , err: %+v\r\n", token, err)
+	member, err := json.Marshal(c.CurrentMember())
+	c.Data["member"] = "null"
+
+	if err == nil {
+		c.Data["member"] = string(member)
+	}
+	
 	c.TplName = "index.html"
 	// 微信接口验证
 	//c.Ctx.WriteString(c.GetString("echostr"))
@@ -101,5 +112,6 @@ func init() {
 		wxScope = conf.String(section + "::wx_scope")
 		wxRedirectURI = conf.String(section + "::wx_redirect_uri")
 		oauth2Endpoint = mpoauth2.NewEndpoint(wxAppID, wxAppSecret)
+		jsAPI = models.WxJsApi{ AppID: wxAppID, AppSecret: wxAppSecret }
 	}
 }
